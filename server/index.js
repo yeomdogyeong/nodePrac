@@ -1,32 +1,43 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const connection = require("./db"); // MySQL 연결
+
 const app = express();
-const port = 3000;
+const PORT = 5174;
 
+app.use(bodyParser.json());
+
+// 할 일 추가
+app.post("/todos", (req, res) => {
+  const { title } = req.body;
+  const query = "INSERT INTO todos (title) VALUES (?)";
+
+  connection.query(query, [title], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("데이터 추가 실패");
+    } else {
+      res.status(201).send({ id: results.insertId, title });
+    }
+  });
+});
+
+// 할 일 조회
+app.get("/todos", (req, res) => {
+  const query = "SELECT * FROM todos";
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("데이터 조회 실패");
+    } else {
+      res.send(results);
+    }
+  });
+});
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send(`<h2>welcome to server</h2>`);
 });
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
-
-app.get("/mango", (req, res) => {
-  res.json({ mango: "my name is MANG!" });
-});
-//params를 이용한 GET
-app.get("/mango/:id", (req, res) => {
-  const mangolingo = req.params.id;
-  console.log(mangolingo);
-  res.send(mangolingo);
-});
-
-app.get("/dogyeong/:name", (req, res) => {
-  const { name } = req.params;
-
-  if (name === "dog") {
-    console.log("mung");
-  } else if (name === "cat") {
-    console.log("nang");
-  }
-  res.json({ myname: name });
-});
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
