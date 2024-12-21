@@ -1,10 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import Axios from "./axios/axios";
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState("");
+  const [value, setValue] = useState("");
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    setMessage(value);
+  };
+
+  const onClickBtn = async () => {
+    const res = await Axios.get("todos");
+    console.log(res);
+  };
 
   return (
     <>
@@ -21,6 +32,18 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <div>
+          <div>
+            hi,{" "}
+            <input
+              placeholder="망고에게 보낼말 입력하세요"
+              value={message}
+              onChange={onChangeInput}
+            />
+          </div>
+          <button onClick={onClickBtn}>go!</button>
+        </div>
+
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
@@ -29,7 +52,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
