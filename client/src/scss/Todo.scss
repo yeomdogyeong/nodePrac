@@ -1,0 +1,20 @@
+#todoBox {
+  background-color: orange;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.todo-container {
+  background-color: pink;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// display: flex;
+// flex-direction: column;
+// justify-content: space-between;
