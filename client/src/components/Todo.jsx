@@ -42,19 +42,26 @@ export const Todo = () => {
   return (
     <div id="todoBox">
       <section className="todo-container">
-        <div>
+        <div className="todo-container__input-box">
           hi,
           <input
+            className="todo-container__input"
             placeholder="망고에게 보낼말 입력하세요"
             value={value}
             onChange={onChangeInput}
             onKeyDown={handleKeyDown}
           />
-          <button onClick={EnterTodo}>Enter!!</button>
+          <button className="todo-container__enter-btn" onClick={EnterTodo}>
+            Enter!!
+          </button>
         </div>
-        <div>
+        <div className="todo-container__list">
           {todos.map((item, idx) => (
-            <div key={idx}>{item}</div>
+            <div key={idx} className="todo-container__item">
+              <div className="todo-container__item-index">{idx}</div>
+              <div className="todo-container__item-content">{item}</div>
+              <div className="todo-container__item-delete">x</div>
+            </div>
           ))}
         </div>
         <div className="btn-box">
