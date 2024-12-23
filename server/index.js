@@ -1,14 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const connection = require("./db"); // MySQL 연결
-
+const cors = require("cors");
 const app = express();
 const PORT = 5174;
 
+app.use(cors());
 app.use(bodyParser.json());
 
 // 할 일 추가
 app.post("/todos", (req, res) => {
+  //title = title.req.body;
   const { title } = req.body;
   const query = "INSERT INTO todos (title) VALUES (?)";
 

@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: "localhost", // MySQL 서버 주소
   user: "root", // MySQL 사용자 이름
   database: "todoDB",
-  password: "Ydkqkdghk1417@", // MySQL 비밀번호
+  password: "ydkwlsaud308", // MySQL 비밀번호
   port: 3306,
   connectTimeout: 10000,
 });
