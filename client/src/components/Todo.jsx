@@ -6,6 +6,8 @@ export const Todo = () => {
   const [value, setValue] = useState("");
   const [todos, setTodos] = useState([]);
 
+  let uuid = self.crypto.randomUUID();
+
   //드래그할 아이템의 인덱스
   const dragItem = useRef();
   //드랍할 위치의 아이템의 인덱스
@@ -46,11 +48,17 @@ export const Todo = () => {
     // const newArr = todos.push(message)
     //     setTodos(todos.push(message));
 
-    setTodos([...todos, value]);
+    setTodos([...todos, { id: uuid, contents: value }]);
 
     console.log(todos);
-
     setValue("");
+  };
+
+  const handleDelete = (id) => {
+    // const newList = [...todos];
+    const newList = todos.filter((el) => el.id !== id);
+    setTodos(newList);
+    console.log(todos);
   };
 
   const handleKeyDown = (e) => {
@@ -85,7 +93,7 @@ export const Todo = () => {
         <div className="todo-container__list">
           {todos.map((item, idx) => (
             <div
-              key={idx}
+              key={item.id}
               className="todo-container__item"
               draggable
               onDragStart={(e) => dragStart(e, idx)}
@@ -93,9 +101,16 @@ export const Todo = () => {
               onDragEnd={drop}
               onDragOver={(e) => e.preventDefault()}
             >
-              <div className="todo-container__item-index">{idx}</div>
-              <div className="todo-container__item-content">{item}</div>
-              <div className="todo-container__item-delete">x</div>
+              <div className="todo-container__item-index">{item.id}</div>
+              <div className="todo-container__item-content">
+                {item.contents}
+              </div>
+              <div
+                className="todo-container__item-delete"
+                onClick={() => handleDelete(item.id)}
+              >
+                x
+              </div>
             </div>
           ))}
         </div>
