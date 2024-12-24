@@ -32,6 +32,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border: 1px solid black;
     padding: 8px;
     margin-bottom: 8px;
@@ -42,6 +43,19 @@
 
     &-content {
       flex: 1;
+    }
+
+    &-edit-box {
+      display: flex;
+    }
+
+    &-edit {
+      cursor: pointer;
+      color: green;
+
+      &-success {
+        color: violet;
+      }
     }
 
     &-delete {

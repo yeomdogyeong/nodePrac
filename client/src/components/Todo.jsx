@@ -5,8 +5,10 @@ export const Todo = () => {
   const [change, setChange] = useState("");
   const [value, setValue] = useState("");
   const [todos, setTodos] = useState([]);
+  //편집해서 바뀌는 내용 state
+  const [edit, setEdit] = useState("");
 
-  let uuid = self.crypto.randomUUID();
+  let uuid = self.crypto.randomUUID().slice(0, 6);
 
   //드래그할 아이템의 인덱스
   const dragItem = useRef();
@@ -44,29 +46,69 @@ export const Todo = () => {
     const word = event.target.value;
     setValue(word);
   };
+  //투두 입력
   const EnterTodo = () => {
     // const newArr = todos.push(message)
     //     setTodos(todos.push(message));
 
-    setTodos([...todos, { id: uuid, contents: value }]);
+    setTodos([...todos, { id: uuid, contents: value, edit: false }]);
 
     console.log(todos);
     setValue("");
   };
 
+  //투두 삭제
   const handleDelete = (id) => {
     // const newList = [...todos];
     const newList = todos.filter((el) => el.id !== id);
     setTodos(newList);
     console.log(todos);
   };
-
+  //엔터 시 한글 두 번 중복 방지
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
       EnterTodo();
     }
   };
 
+  const handleEdit = (id) => {
+    const newList = [...todos];
+    const select = todos.find((el) => el.id === id);
+    const idx = todos.findIndex((el) => el.id === id);
+
+    if (select) {
+      select.edit = true;
+      newList.splice(idx, 1, select);
+    }
+
+    setTodos(newList);
+    console.log(todos);
+    //select가 있으면 편집기능 on
+    // if (select) {
+    //   select.edit = true;
+    // }
+  };
+
+  const handleEditSucess = (id) => {
+    const newList = [...todos];
+    const select = todos.find((el) => el.id === id);
+    const idx = todos.findIndex((el) => el.id === id);
+
+    if (select) {
+      select.edit = false;
+      select.contents = edit;
+      newList.splice(idx, 1, select);
+    }
+    console.log(select);
+    setTodos(newList);
+  };
+
+  const editOnChange = (e) => {
+    setEdit(e.target.value);
+    console.log(edit);
+  };
+
+  //서버에서 요청받기
   const handleData = async () => {
     const res = await Axios.get("todos");
     console.log(res);
@@ -102,14 +144,33 @@ export const Todo = () => {
               onDragOver={(e) => e.preventDefault()}
             >
               <div className="todo-container__item-index">{item.id}</div>
-              <div className="todo-container__item-content">
-                {item.contents}
-              </div>
-              <div
-                className="todo-container__item-delete"
-                onClick={() => handleDelete(item.id)}
-              >
-                x
+              {item.edit && item.edit ? (
+                <input value={edit} onChange={(e) => editOnChange(e)} />
+              ) : (
+                <div className="todo-container__item-content">
+                  {item.contents}
+                </div>
+              )}
+
+              <div className="todo-container__item-edit-box">
+                <div
+                  className="todo-container__item-edit"
+                  onClick={() => handleEdit(item.id)}
+                >
+                  수정
+                </div>
+                <div
+                  className="todo-container__item-edit-success"
+                  onClick={() => handleEditSucess(item.id)}
+                >
+                  완료
+                </div>
+                <div
+                  className="todo-container__item-delete"
+                  onClick={() => handleDelete(item.id)}
+                >
+                  x
+                </div>
               </div>
             </div>
           ))}
