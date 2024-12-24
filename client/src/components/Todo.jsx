@@ -14,25 +14,27 @@ export const Todo = () => {
   //드래그할 아이템을 집었을때
   const dragStart = (e, position) => {
     dragItem.current = position;
-    console.log("start", e.target.innerHTML);
+    // console.log("start", e.target.innerHTML);
     console.log("dragItem", dragItem);
   };
 
   //드래그할 아이템이 어떤 인덱스 위에 포개졌을때
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
-    console.log("over", e.target.innerHTML);
+    // console.log("over", e.target.innerHTML);
     console.log("dragOver", dragOverItem);
   };
 
   //드래그한 아이템을 놨을때
+  //아래에서 위로 올리는게 안됌
   const drop = () => {
     const newList = [...todos];
     //newlist를 잘라야지
-    const [remove] = newList.splice(dragItem, 1);
-    console.log(remove);
-    newList.splice(dragOverItem, 1, remove);
+    const [remove] = newList.splice(dragItem.current, 1);
+    newList.splice(dragOverItem.current, 0, remove);
     setTodos(newList);
+    dragOverItem.current = null;
+    dragItem.current = null;
   };
 
   //input 바뀔때 실행
@@ -89,6 +91,7 @@ export const Todo = () => {
               onDragStart={(e) => dragStart(e, idx)}
               onDragEnter={(e) => dragEnter(e, idx)}
               onDragEnd={drop}
+              onDragOver={(e) => e.preventDefault()}
             >
               <div className="todo-container__item-index">{idx}</div>
               <div className="todo-container__item-content">{item}</div>
