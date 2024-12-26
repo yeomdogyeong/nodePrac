@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Axios from "../axios/axios";
+import { Dropdown } from "./Dropdown";
 import "../scss/Todo.scss";
 export const Todo = () => {
   const [change, setChange] = useState("");
@@ -132,6 +133,7 @@ export const Todo = () => {
             Enter!!
           </button>
         </div>
+        <Dropdown />
         <div className="todo-container__list">
           {todos.map((item, idx) => (
             <div
