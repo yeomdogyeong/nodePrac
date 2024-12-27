@@ -33,11 +33,16 @@ export const Dropdown = () => {
             );
           })
         ) : select ? (
-          <div className={`dropdown-content ${select ? "select" : "unselect"}`}>
+          <div
+            draggable
+            className={`dropdown-content ${select ? "select" : "unselect"}`}
+          >
             {select}
           </div>
         ) : (
-          <div className="dropdown-content__default ">장소</div>
+          <div draggable className="dropdown-content__default ">
+            장소
+          </div>
         )}
       </div>
     </div>

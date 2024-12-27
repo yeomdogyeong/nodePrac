@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import Axios from "../axios/axios";
 import { Dropdown } from "./Dropdown";
 import "../scss/Todo.scss";
+
 export const Todo = () => {
   const [change, setChange] = useState("");
   const [value, setValue] = useState("");
   const [todos, setTodos] = useState([]);
   //편집해서 바뀌는 내용 state
   const [edit, setEdit] = useState("");
-
+  const [selectDrop, setSelectDrop] = useState([]);
   let uuid = self.crypto.randomUUID().slice(0, 6);
 
   //드래그할 아이템의 인덱스
@@ -115,25 +116,36 @@ export const Todo = () => {
     console.log(res);
   };
 
+  const handleSelectDrop = () => {
+    //배열에 dropdown 컴포넌트 추가
+
+    setSelectDrop([...selectDrop, <Dropdown key={selectDrop.length} />]);
+    console.log(selectDrop);
+  };
+
   useEffect(() => {}, [todos]);
 
   return (
     <div id="todoBox">
       <section className="todo-container">
-        <div className="todo-container__input-box">
-          hi,
-          <input
-            className="todo-container__input"
-            placeholder="망고에게 보낼말 입력하세요"
-            value={value}
-            onChange={onChangeInput}
-            onKeyDown={handleKeyDown}
-          />
-          <button className="todo-container__enter-btn" onClick={EnterTodo}>
-            Enter!!
-          </button>
+        <div className="todo-container__header-box">
+          <div className="todo-container__input-box">
+            <input
+              className="todo-container__input"
+              placeholder="망고에게 보낼말 입력하세요"
+              value={value}
+              onChange={onChangeInput}
+              onKeyDown={handleKeyDown}
+            />
+            <button className="todo-container__enter-btn" onClick={EnterTodo}>
+              Enter!!
+            </button>
+          </div>
+          <div className="todo-container__place-box" onClick={handleSelectDrop}>
+            + 장소
+          </div>
         </div>
-        <Dropdown />
+        <div>{selectDrop.map((el) => el)}</div>
         <div className="todo-container__list">
           {todos.map((item, idx) => (
             <div

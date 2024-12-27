@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   padding: 80px;
+  margin: 0 auto;
 }
 
 .todo-container {
@@ -13,9 +14,33 @@
   flex-direction: column;
   justify-content: space-between;
 
-  &__input-box {
+  &__header-box {
+    width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 8px;
+  }
+
+  &__input-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__place-box {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    padding: 0.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: darkgray;
+    }
   }
 
   &__list {
