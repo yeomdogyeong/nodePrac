@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../scss/Dropdown.scss";
-export const Dropdown = () => {
+
+export const Dropdown = ({ deleteDrop }) => {
   const [drop, setDrop] = useState(false);
   const [select, setSelect] = useState(false);
 
@@ -23,21 +24,27 @@ export const Dropdown = () => {
         {drop ? (
           place.map((el, idx) => {
             return (
-              <div
+              <button
                 key={idx}
                 onClick={() => handleSelect(el)}
                 className="drop-container__list"
               >
                 {el}
-              </div>
+              </button>
             );
           })
         ) : select ? (
-          <div
-            draggable
-            className={`dropdown-content ${select ? "select" : "unselect"}`}
-          >
-            {select}
+          <div className="dropdown-content__select">
+            <button className="select">{select}</button>
+            <button
+              className="delete"
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteDrop();
+              }}
+            >
+              X
+            </button>
           </div>
         ) : (
           <div draggable className="dropdown-content__default ">

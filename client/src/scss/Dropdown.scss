@@ -2,7 +2,7 @@
   display: flex;
   //   border: 1px solid white;
   border-radius: 5px;
-  padding: 0.5rem;
+  padding: 1px;
   align-items: flex-start;
   width: 100%;
   &__list {
@@ -26,23 +26,27 @@
 
   &.open {
     opacity: 1;
-    cursor: pointer;
   }
 
   &.close {
-    cursor: pointer;
   }
 
-  &.select {
-    opacity: 1;
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: #4c585b;
-    padding: 0.2rem 0.5rem;
-  }
+  &__select {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 
-  &.unselect {
-    opacity: 0.5;
+    .select {
+      padding: 0.2rem 0.7rem;
+      border-radius: 10px;
+    }
+
+    .delete {
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 0.1rem 0.3rem;
+    }
   }
 
   &__default {

@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Axios from "../axios/axios";
-import { Dropdown } from "./Dropdown";
 import "../scss/Todo.scss";
 
 export const Todo = () => {
@@ -9,39 +8,8 @@ export const Todo = () => {
   const [todos, setTodos] = useState([]);
   //편집해서 바뀌는 내용 state
   const [edit, setEdit] = useState("");
-  const [selectDrop, setSelectDrop] = useState([]);
+
   let uuid = self.crypto.randomUUID().slice(0, 6);
-
-  //드래그할 아이템의 인덱스
-  const dragItem = useRef();
-  //드랍할 위치의 아이템의 인덱스
-  const dragOverItem = useRef();
-
-  //드래그할 아이템을 집었을때
-  const dragStart = (e, position) => {
-    dragItem.current = position;
-    // console.log("start", e.target.innerHTML);
-    console.log("dragItem", dragItem);
-  };
-
-  //드래그할 아이템이 어떤 인덱스 위에 포개졌을때
-  const dragEnter = (e, position) => {
-    dragOverItem.current = position;
-    // console.log("over", e.target.innerHTML);
-    console.log("dragOver", dragOverItem);
-  };
-
-  //드래그한 아이템을 놨을때
-  //아래에서 위로 올리는게 안됌
-  const drop = () => {
-    const newList = [...todos];
-    //newlist를 잘라야지
-    const [remove] = newList.splice(dragItem.current, 1);
-    newList.splice(dragOverItem.current, 0, remove);
-    setTodos(newList);
-    dragOverItem.current = null;
-    dragItem.current = null;
-  };
 
   //input 바뀔때 실행
   const onChangeInput = (event) => {
@@ -85,10 +53,6 @@ export const Todo = () => {
 
     setTodos(newList);
     console.log(todos);
-    //select가 있으면 편집기능 on
-    // if (select) {
-    //   select.edit = true;
-    // }
   };
 
   const handleEditSucess = (id) => {
@@ -116,13 +80,6 @@ export const Todo = () => {
     console.log(res);
   };
 
-  const handleSelectDrop = () => {
-    //배열에 dropdown 컴포넌트 추가
-
-    setSelectDrop([...selectDrop, <Dropdown key={selectDrop.length} />]);
-    console.log(selectDrop);
-  };
-
   useEffect(() => {}, [todos]);
 
   return (
@@ -137,26 +94,15 @@ export const Todo = () => {
               onChange={onChangeInput}
               onKeyDown={handleKeyDown}
             />
+
             <button className="todo-container__enter-btn" onClick={EnterTodo}>
               Enter!!
             </button>
           </div>
-          <div className="todo-container__place-box" onClick={handleSelectDrop}>
-            + 장소
-          </div>
         </div>
-        <div>{selectDrop.map((el) => el)}</div>
         <div className="todo-container__list">
-          {todos.map((item, idx) => (
-            <div
-              key={item.id}
-              className="todo-container__item"
-              draggable
-              onDragStart={(e) => dragStart(e, idx)}
-              onDragEnter={(e) => dragEnter(e, idx)}
-              onDragEnd={drop}
-              onDragOver={(e) => e.preventDefault()}
-            >
+          {todos.map((item) => (
+            <div key={item.id} className="todo-container__item" draggable>
               <div className="todo-container__item-index">{item.id}</div>
               {item.edit && item.edit ? (
                 <input value={edit} onChange={(e) => editOnChange(e)} />
