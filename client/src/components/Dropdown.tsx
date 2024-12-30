@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "../scss/Dropdown.scss";
 
-export const Dropdown = ({ deleteDrop }) => {
+interface DeleteDrop {
+  deleteDrop: () => void;
+}
+
+export const Dropdown = ({ deleteDrop }: DeleteDrop) => {
   const [drop, setDrop] = useState(false);
   const [select, setSelect] = useState(false);
 
@@ -11,8 +15,10 @@ export const Dropdown = ({ deleteDrop }) => {
     setDrop(!drop);
   };
 
-  const handleSelect = (contents) => {
-    setSelect(contents);
+  const handleSelect = (contents: string) => {
+    if (contents) {
+      setSelect(!select);
+    }
     console.log(select);
   };
   return (

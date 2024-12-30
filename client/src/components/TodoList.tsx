@@ -134,7 +134,7 @@ export const TodoList = () => {
     console.log(combinedList);
   };
 
-  const deleteDrop = (id) => {
+  const deleteDrop = (id: string) => {
     const newList = combinedList.filter((el) => el.id !== id);
     setCombinedList(newList);
     console.log(combinedList);
