@@ -8,7 +8,7 @@ interface DeleteDrop {
 export const Dropdown = ({ deleteDrop }: DeleteDrop) => {
   const [drop, setDrop] = useState(false);
   const [select, setSelect] = useState(false);
-
+  const [word, setWord] = useState<string>("");
   const place = ["🏠 학교", "💼 직장", "🏫 가정", "👟 야외"];
 
   const handleDrop = () => {
@@ -16,9 +16,9 @@ export const Dropdown = ({ deleteDrop }: DeleteDrop) => {
   };
 
   const handleSelect = (contents: string) => {
-    if (contents) {
-      setSelect(!select);
-    }
+    setWord(contents);
+    setSelect(!select);
+
     console.log(select);
   };
   return (
@@ -41,7 +41,7 @@ export const Dropdown = ({ deleteDrop }: DeleteDrop) => {
           })
         ) : select ? (
           <div className="dropdown-content__select">
-            <button className="select">{select}</button>
+            <button className="select">{word}</button>
             <button
               className="delete"
               onClick={(e) => {

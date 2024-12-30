@@ -3,36 +3,40 @@ import Axios from "../axios/axios";
 import { Dropdown } from "./Dropdown";
 import "../scss/TodoList.scss";
 
-//누를 때 추가
-//
+interface CompletedList {
+  id: string;
+  type?: "dropdown";
+  edit?: boolean;
+  contents?: string;
+}
 export const TodoList = () => {
   const [change, setChange] = useState("");
   const [value, setValue] = useState("");
   //편집해서 바뀌는 내용 state
   const [edit, setEdit] = useState("");
   //tag + todo 드래그 가능한 리스트 모음
-  const [combinedList, setCombinedList] = useState([]);
+  const [combinedList, setCombinedList] = useState<CompletedList[]>([]);
   let uuid = self.crypto.randomUUID().slice(0, 6);
 
   //드래그할 아이템의 인덱스
-  const dragItem = useRef();
+  const dragItem = useRef<number | null>();
   //드랍할 위치의 아이템의 인덱스
-  const dragOverItem = useRef();
+  const dragOverItem = useRef<number | null>();
 
   //드래그할 아이템을 집었을때
-  const dragStart = (e, position) => {
+  const dragStart = (e: React.DragEvent<HTMLDivElement>, position: number) => {
     dragItem.current = position;
   };
 
   //드래그할 아이템이 어떤 인덱스 위에 포개졌을때
-  const dragEnter = (e, position) => {
+  const dragEnter = (e: React.DragEvent<HTMLDivElement>, position: number) => {
     dragOverItem.current = position;
     // console.log("over", e.target.innerHTML);
   };
 
   //드래그한 아이템을 놨을때
   //아래에서 위로 올리는게 안됌
-  const drop = (e) => {
+  const drop = (e: DragEvent) => {
     // const condition = e.target.innerHTML;
     // if (condition.includes("drop-container")) {
     //   const enterIdx = dragOverItem.current;
@@ -47,6 +51,7 @@ export const TodoList = () => {
     // }
 
     const newList = [...combinedList];
+    console.log(newList);
     //newlist를 잘라야지
     const [remove] = newList.splice(dragItem.current, 1);
     newList.splice(dragOverItem.current, 0, remove);
@@ -57,7 +62,7 @@ export const TodoList = () => {
   };
 
   //input 바뀔때 실행
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const word = event.target.value;
     setValue(word);
   };
@@ -76,18 +81,18 @@ export const TodoList = () => {
   };
 
   //투두 삭제
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     const newList = combinedList.filter((el) => el.id !== id);
     setCombinedList(newList);
   };
   //엔터 시 한글 두 번 중복 방지
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
       EnterTodo();
     }
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = (id: string) => {
     const newList = [...combinedList];
     const select = combinedList.find((el) => el.id === id);
     const idx = combinedList.findIndex((el) => el.id === id);
@@ -104,7 +109,7 @@ export const TodoList = () => {
     // }
   };
 
-  const handleEditSucess = (id) => {
+  const handleEditSucess = (id: string) => {
     const newList = [...combinedList];
     const select = combinedList.find((el) => el.id === id);
     const idx = combinedList.findIndex((el) => el.id === id);
@@ -118,7 +123,7 @@ export const TodoList = () => {
     setCombinedList(newList);
   };
 
-  const editOnChange = (e) => {
+  const editOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEdit(e.target.value);
     console.log(edit);
   };
@@ -159,6 +164,7 @@ export const TodoList = () => {
               Enter!!
             </button>
           </div>
+          ––{" "}
           <div className="todo-container__place-box" onClick={plusPlace}>
             + 장소
           </div>
@@ -171,11 +177,11 @@ export const TodoList = () => {
               draggable
               onDragStart={(e) => dragStart(e, idx)}
               onDragEnter={(e) => dragEnter(e, idx)}
-              onDragEnd={drop}
+              onDragEnd={() => drop}
               onDragOver={(e) => e.preventDefault()}
             >
               {item.type === "dropdown" ? (
-                <div key={item.uuid} className="drop">
+                <div key={item.id} className="drop">
                   <Dropdown deleteDrop={() => deleteDrop(item.id)} />
                 </div>
               ) : item.edit ? (
@@ -189,7 +195,7 @@ export const TodoList = () => {
                   </button>
                 </div>
               ) : (
-                <div className="todo" key={item.uuid}>
+                <div className="todo" key={item.id}>
                   <div className="todo-container__item-content">
                     {item.contents}
                   </div>
