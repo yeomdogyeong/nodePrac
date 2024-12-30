@@ -8,10 +8,9 @@ import "../scss/TodoList.scss";
 export const TodoList = () => {
   const [change, setChange] = useState("");
   const [value, setValue] = useState("");
-  const [todos, setTodos] = useState([]);
   //편집해서 바뀌는 내용 state
   const [edit, setEdit] = useState("");
-
+  //tag + todo 드래그 가능한 리스트 모음
   const [combinedList, setCombinedList] = useState([]);
   let uuid = self.crypto.randomUUID().slice(0, 6);
 
@@ -23,20 +22,30 @@ export const TodoList = () => {
   //드래그할 아이템을 집었을때
   const dragStart = (e, position) => {
     dragItem.current = position;
-    // console.log("start", e.target.innerHTML);
-    console.log("dragItem", dragItem);
   };
 
   //드래그할 아이템이 어떤 인덱스 위에 포개졌을때
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
     // console.log("over", e.target.innerHTML);
-    console.log("dragOver", dragOverItem);
   };
 
   //드래그한 아이템을 놨을때
   //아래에서 위로 올리는게 안됌
-  const drop = () => {
+  const drop = (e) => {
+    // const condition = e.target.innerHTML;
+    // if (condition.includes("drop-container")) {
+    //   const enterIdx = dragOverItem.current;
+    //   const minusIdx = enterIdx - 1;
+    //   const plusIdx = enterIdx + 1;
+    //   console.log(combinedList[minusIdx]);
+    //   const item1 = combinedList[minusIdx].type;
+    //   const item2 = combinedList[plusIdx].type;
+    //   if (item1 === "dropdown" || item2 === "dropdown") {
+    //     return;
+    //   }
+    // }
+
     const newList = [...combinedList];
     //newlist를 잘라야지
     const [remove] = newList.splice(dragItem.current, 1);
@@ -63,7 +72,6 @@ export const TodoList = () => {
       { id: uuid, contents: value, edit: false },
     ];
     setCombinedList(newList);
-    console.log(todos);
     setValue("");
   };
 
@@ -71,7 +79,6 @@ export const TodoList = () => {
   const handleDelete = (id) => {
     const newList = combinedList.filter((el) => el.id !== id);
     setCombinedList(newList);
-    console.log(todos);
   };
   //엔터 시 한글 두 번 중복 방지
   const handleKeyDown = (e) => {

@@ -47,9 +47,7 @@ export const Dropdown = ({ deleteDrop }) => {
             </button>
           </div>
         ) : (
-          <div draggable className="dropdown-content__default ">
-            장소
-          </div>
+          <div className="dropdown-content__default ">장소</div>
         )}
       </div>
     </div>
