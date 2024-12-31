@@ -19,24 +19,26 @@ export const TodoList = () => {
   let uuid = self.crypto.randomUUID().slice(0, 6);
 
   //드래그할 아이템의 인덱스
-  const dragItem = useRef<number | null>();
+  const dragItem = useRef<number | null>(null);
   //드랍할 위치의 아이템의 인덱스
-  const dragOverItem = useRef<number | null>();
+  const dragOverItem = useRef<number | null>(null);
 
   //드래그할 아이템을 집었을때
   const dragStart = (e: React.DragEvent<HTMLDivElement>, position: number) => {
     dragItem.current = position;
+    console.log(dragItem.current);
   };
 
   //드래그할 아이템이 어떤 인덱스 위에 포개졌을때
   const dragEnter = (e: React.DragEvent<HTMLDivElement>, position: number) => {
     dragOverItem.current = position;
+    console.log(dragOverItem.current);
     // console.log("over", e.target.innerHTML);
   };
 
   //드래그한 아이템을 놨을때
   //아래에서 위로 올리는게 안됌
-  const drop = (e: DragEvent) => {
+  const drop = (e: React.DragEvent<HTMLDivElement>) => {
     // const condition = e.target.innerHTML;
     // if (condition.includes("drop-container")) {
     //   const enterIdx = dragOverItem.current;
@@ -49,13 +51,11 @@ export const TodoList = () => {
     //     return;
     //   }
     // }
-
     const newList = [...combinedList];
-    console.log(newList);
-    //newlist를 잘라야지
+    //null일 경우
+    if (dragItem.current === null || dragOverItem.current === null) return;
     const [remove] = newList.splice(dragItem.current, 1);
     newList.splice(dragOverItem.current, 0, remove);
-
     setCombinedList(newList);
     dragOverItem.current = null;
     dragItem.current = null;
@@ -164,7 +164,6 @@ export const TodoList = () => {
               Enter!!
             </button>
           </div>
-          ––{" "}
           <div className="todo-container__place-box" onClick={plusPlace}>
             + 장소
           </div>
@@ -177,7 +176,7 @@ export const TodoList = () => {
               draggable
               onDragStart={(e) => dragStart(e, idx)}
               onDragEnter={(e) => dragEnter(e, idx)}
-              onDragEnd={() => drop}
+              onDragEnd={(e) => drop(e)}
               onDragOver={(e) => e.preventDefault()}
             >
               {item.type === "dropdown" ? (
