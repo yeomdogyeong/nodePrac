@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import Axios from "../axios/axios";
 import { Dropdown } from "./Dropdown";
 import "../scss/TodoList.scss";
-
+import { db } from "../firebase";
+import { addDoc, collection } from "firebase/firestore";
 interface CompletedList {
   id: string;
-  type?: "dropdown";
+  type?: "dropdown" | null;
   edit?: boolean;
   contents?: string;
 }
@@ -22,6 +23,20 @@ export const TodoList = () => {
   const dragItem = useRef<number | null>(null);
   //드랍할 위치의 아이템의 인덱스
   const dragOverItem = useRef<number | null>(null);
+
+  const addTodo = async (id: string) => {
+    try {
+      await addDoc(collection(db, "todos"), {
+        id,
+        content: value,
+        type: null,
+        edit: false,
+      });
+      console.log("Todo added!");
+    } catch (error) {
+      console.error("Error adding todo:", error);
+    }
+  };
 
   //드래그할 아이템을 집었을때
   const dragStart = (e: React.DragEvent<HTMLDivElement>, position: number) => {
@@ -52,7 +67,7 @@ export const TodoList = () => {
     //   }
     // }
     const newList = [...combinedList];
-    //null일 경우
+    //null일 경우의 조건을 추가해서 조건을 맞춤
     if (dragItem.current === null || dragOverItem.current === null) return;
     const [remove] = newList.splice(dragItem.current, 1);
     newList.splice(dragOverItem.current, 0, remove);
@@ -219,7 +234,7 @@ export const TodoList = () => {
           ))}
         </div>
         <div className="btn-box">
-          <button onClick={() => console.log(change)}>console</button>
+          <button onClick={() => addTodo(uuid)}>console</button>
           <button onClick={handleData}>goData!</button>
         </div>
       </section>
