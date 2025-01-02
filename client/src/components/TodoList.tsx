@@ -9,6 +9,7 @@ interface CompletedList {
   type?: "dropdown" | null;
   edit?: boolean;
   contents?: string;
+  date: string;
 }
 export const TodoList = () => {
   const [change, setChange] = useState("");
@@ -17,25 +18,58 @@ export const TodoList = () => {
   const [edit, setEdit] = useState("");
   //tag + todo 드래그 가능한 리스트 모음
   const [combinedList, setCombinedList] = useState<CompletedList[]>([]);
+
   let uuid = self.crypto.randomUUID().slice(0, 6);
+  const newDate = new Date();
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth() + 1;
+
+  const day = newDate.getDate();
+  const date = `${year}-${month}-${day}`;
 
   //드래그할 아이템의 인덱스
   const dragItem = useRef<number | null>(null);
   //드랍할 위치의 아이템의 인덱스
   const dragOverItem = useRef<number | null>(null);
 
+  //localstorage에 문자열 데이터를 객체/배열로 변환
+  const goToObj = (value: string) => {
+    return JSON.parse(value);
+  };
+  //객체를 json으로 변환
+  const goToJson = <T,>(value: T) => {
+    return JSON.stringify(value);
+  };
+
   const addTodo = async (id: string) => {
-    try {
-      await addDoc(collection(db, "todos"), {
-        id,
-        content: value,
-        type: null,
-        edit: false,
-      });
-      console.log("Todo added!");
-    } catch (error) {
-      console.error("Error adding todo:", error);
+    const newList = {
+      id: date,
+      content: value,
+      type: null,
+      edit: false,
+      date,
+    };
+    await addDoc(collection(db, "todos"), newList);
+    console.log("Todo added!");
+    const jsonList = goToJson(newList);
+    const getList = goToObj(localStorage.getItem(date) || "[]");
+    const todayList = getList.push(jsonList);
+    localStorage.setItem(date, goToJson(todayList));
+  };
+  //로컬스토리지에서 불러옴
+  const getAllTodos = () => {
+    let todos = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key !== null) {
+        const value = localStorage.getItem(key);
+        if (value) {
+          todos.push(JSON.parse(value));
+        }
+      }
     }
+    console.log(todos);
+    return todos;
   };
 
   //드래그할 아이템을 집었을때
@@ -89,7 +123,7 @@ export const TodoList = () => {
 
     const newList = [
       ...combinedList,
-      { id: uuid, contents: value, edit: false },
+      { id: uuid, contents: value, edit: false, date: date },
     ];
     setCombinedList(newList);
     setValue("");
@@ -150,7 +184,7 @@ export const TodoList = () => {
   };
 
   const plusPlace = () => {
-    setCombinedList([...combinedList, { id: uuid, type: "dropdown" }]);
+    setCombinedList([...combinedList, { id: uuid, type: "dropdown", date }]);
     console.log(combinedList);
   };
 
@@ -160,7 +194,9 @@ export const TodoList = () => {
     console.log(combinedList);
   };
 
-  useEffect(() => {}, [combinedList]);
+  useEffect(() => {
+    getAllTodos();
+  }, [combinedList]);
 
   return (
     <div id="todoBox">

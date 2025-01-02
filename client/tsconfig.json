@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "target": "es6",
+    "target": "esnext",
+    "module": "esnext",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": ["vite/client"]
   },
   "include": ["src/**/*", "*.ts"],
   "exclude": ["node_modules"]
