@@ -17,8 +17,8 @@ export const TodoList = () => {
   //편집해서 바뀌는 내용 state
   const [edit, setEdit] = useState("");
   //tag + todo 드래그 가능한 리스트 모음
-  const [combinedList, setCombinedList] = useState<CompletedList[]>([]);
-
+  const [saveList, setSaveList] = useState<CompletedList[]>([]);
+  const [combinedList, setCombinedList] = useState<CompletedList[]>(saveList);
   let uuid = self.crypto.randomUUID().slice(0, 6);
   const newDate = new Date();
   const year = newDate.getFullYear();
@@ -44,7 +44,7 @@ export const TodoList = () => {
   const addTodo = async (id: string) => {
     const newList = {
       id: date,
-      content: value,
+      contents: value,
       type: null,
       edit: false,
       date,
@@ -52,9 +52,12 @@ export const TodoList = () => {
     await addDoc(collection(db, "todos"), newList);
     console.log("Todo added!");
     const jsonList = goToJson(newList);
+    console.log("1");
     const getList = goToObj(localStorage.getItem(date) || "[]");
-    const todayList = getList.push(jsonList);
-    localStorage.setItem(date, goToJson(todayList));
+    console.log(getList);
+    getList.push(newList);
+    console.log("3");
+    localStorage.setItem(date, goToJson(getList));
   };
   //로컬스토리지에서 불러옴
   const getAllTodos = () => {
@@ -63,13 +66,16 @@ export const TodoList = () => {
       const key = localStorage.key(i);
       if (key !== null) {
         const value = localStorage.getItem(key);
+        console.log("v", value);
         if (value) {
           todos.push(JSON.parse(value));
         }
       }
     }
     console.log(todos);
-    return todos;
+    setSaveList(todos[0]);
+    setCombinedList(todos[0]);
+    console.log(saveList);
   };
 
   //드래그할 아이템을 집었을때
@@ -196,7 +202,7 @@ export const TodoList = () => {
 
   useEffect(() => {
     getAllTodos();
-  }, [combinedList]);
+  }, []);
 
   return (
     <div id="todoBox">
