@@ -43,23 +43,20 @@ export const TodoList = () => {
 
   const addTodo = async (id: string) => {
     const newList = {
-      id: date,
+      id: uuid,
       contents: value,
       type: null,
       edit: false,
       date,
     };
-    await addDoc(collection(db, "todos"), newList);
-    console.log("Todo added!");
-    const jsonList = goToJson(newList);
-    console.log("1");
+    // await addDoc(collection(db, "todos"), newList);
     const getList = goToObj(localStorage.getItem(date) || "[]");
-    console.log(getList);
     getList.push(newList);
-    console.log("3");
     localStorage.setItem(date, goToJson(getList));
   };
-  //로컬스토리지에서 불러옴
+
+  //로컬스토리지에서 오늘의
+  //TodoList 불러옴ㄴ
   const getAllTodos = () => {
     let todos = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -73,6 +70,7 @@ export const TodoList = () => {
       }
     }
     console.log(todos);
+    //이 부분 나중에 고쳐야함 [0]이 아니라 오늘 date로
     setSaveList(todos[0]);
     setCombinedList(todos[0]);
     console.log(saveList);
@@ -217,9 +215,9 @@ export const TodoList = () => {
               onKeyDown={handleKeyDown}
             />
 
-            <button className="todo-container__enter-btn" onClick={EnterTodo}>
+            {/* <button className="todo-container__enter-btn" onClick={EnterTodo}>
               Enter!!
-            </button>
+            </button> */}
           </div>
           <div className="todo-container__place-box" onClick={plusPlace}>
             + 장소
@@ -277,6 +275,7 @@ export const TodoList = () => {
         </div>
         <div className="btn-box">
           <button onClick={() => addTodo(uuid)}>console</button>
+          <button onClick={handleData}>goCalender</button>
           <button onClick={handleData}>goData!</button>
         </div>
       </section>
