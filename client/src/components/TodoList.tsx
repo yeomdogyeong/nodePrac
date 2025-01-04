@@ -4,6 +4,8 @@ import { Dropdown } from "./Dropdown";
 import "../scss/TodoList.scss";
 import { db } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router";
+import Calendar from "react-calendar";
 interface CompletedList {
   id: string;
   type?: "dropdown" | null;
@@ -21,6 +23,7 @@ export const TodoList = () => {
   const [combinedList, setCombinedList] = useState<CompletedList[]>(saveList);
   let uuid = self.crypto.randomUUID().slice(0, 6);
   const newDate = new Date();
+  const newDateSlice = newDate.toString().substring(0, 15);
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
 
@@ -31,6 +34,12 @@ export const TodoList = () => {
   const dragItem = useRef<number | null>(null);
   //드랍할 위치의 아이템의 인덱스
   const dragOverItem = useRef<number | null>(null);
+
+  const navigate = useNavigate();
+
+  const goToAbout = (route: string) => {
+    navigate(`/${route}`);
+  };
 
   //localstorage에 문자열 데이터를 객체/배열로 변환
   const goToObj = (value: string) => {
@@ -52,7 +61,7 @@ export const TodoList = () => {
     // await addDoc(collection(db, "todos"), newList);
     const getList = goToObj(localStorage.getItem(date) || "[]");
     getList.push(newList);
-    localStorage.setItem(date, goToJson(getList));
+    localStorage.setItem(newDateSlice, goToJson(getList));
   };
 
   //로컬스토리지에서 오늘의
@@ -200,6 +209,7 @@ export const TodoList = () => {
 
   useEffect(() => {
     getAllTodos();
+    console.log(new Date());
   }, []);
 
   return (
@@ -275,7 +285,7 @@ export const TodoList = () => {
         </div>
         <div className="btn-box">
           <button onClick={() => addTodo(uuid)}>console</button>
-          <button onClick={handleData}>goCalender</button>
+          <button onClick={() => goToAbout("calendar")}>goCalender</button>
           <button onClick={handleData}>goData!</button>
         </div>
       </section>

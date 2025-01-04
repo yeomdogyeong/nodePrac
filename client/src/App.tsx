@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TodoList />} />
-        <Route path="/calender" element={<Calendars />} />
+        <Route path="/calendar" element={<Calendars />} />
       </Routes>
     </BrowserRouter>
   );
