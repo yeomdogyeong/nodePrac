@@ -7,9 +7,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const Calendars = () => {
   const [value, onChange] = useState<Value>(new Date());
-  const [monthList, setMonthList] = useState<number[]>([]);
-  const [dayList, setDayList] = useState<number[] | undefined>([]);
-  const [list, setList] = useState({});
+  const [list, setList] = useState<string[]>([]);
   // const [month, setMonth] = useState<number>(0);
   // const [date, setDate] = useState<number>(0);
 
@@ -50,23 +48,19 @@ export const Calendars = () => {
   };
 
   const getAllList = () => {
-    const newList1 = [];
-    const newList2 = [];
+    let newList = [];
     for (let i = 0; i < localStorage.length; i++) {
-      const key = String(localStorage.key(i));
-      const month = key.toString().substring(4, 7);
-      const day = key.toString().substring(8, 10);
-      newList1.push(convertMonth(month));
-      newList2.push(convertDay(day));
+      const rawData = localStorage.key(i);
+      if (rawData !== null) {
+        newList.push(rawData);
+      }
     }
-
-    setMonthList(newList1);
-    setDayList(newList2);
+    setList(newList);
+    console.log(list);
   };
 
   useEffect(() => {
     getAllList();
-    console.log(monthList, dayList);
   }, []);
 
   return (
@@ -83,7 +77,7 @@ export const Calendars = () => {
         value={value}
         onClickDay={(value, event) => alert(value)}
         tileClassName={({ date }) =>
-          ["2024-01-01", "2024-01-02", "2024-01-07"].some((todoDate) => {
+          list.some((todoDate) => {
             if (
               new Date(todoDate).getMonth() === date.getMonth() &&
               new Date(todoDate).getDate() === date.getDate()

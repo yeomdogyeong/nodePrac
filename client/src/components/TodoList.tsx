@@ -61,7 +61,7 @@ export const TodoList = () => {
     // await addDoc(collection(db, "todos"), newList);
     const getList = goToObj(localStorage.getItem(date) || "[]");
     getList.push(newList);
-    localStorage.setItem(newDateSlice, goToJson(getList));
+    localStorage.setItem(date, goToJson(getList));
   };
 
   //로컬스토리지에서 오늘의
