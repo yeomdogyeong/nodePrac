@@ -4,7 +4,7 @@ import { Dropdown } from "./Dropdown";
 import "../scss/TodoList.scss";
 import { db } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import Calendar from "react-calendar";
 interface CompletedList {
   id: string;
@@ -21,6 +21,11 @@ export const TodoList = () => {
   //tag + todo 드래그 가능한 리스트 모음
   const [saveList, setSaveList] = useState<CompletedList[]>([]);
   const [combinedList, setCombinedList] = useState<CompletedList[]>(saveList);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const todoDay = searchParams.get("day");
+  const { id } = useParams();
+
   let uuid = self.crypto.randomUUID().slice(0, 6);
   const newDate = new Date();
   const newDateSlice = newDate.toString().substring(0, 15);
@@ -101,18 +106,6 @@ export const TodoList = () => {
   //드래그한 아이템을 놨을때
   //아래에서 위로 올리는게 안됌
   const drop = (e: React.DragEvent<HTMLDivElement>) => {
-    // const condition = e.target.innerHTML;
-    // if (condition.includes("drop-container")) {
-    //   const enterIdx = dragOverItem.current;
-    //   const minusIdx = enterIdx - 1;
-    //   const plusIdx = enterIdx + 1;
-    //   console.log(combinedList[minusIdx]);
-    //   const item1 = combinedList[minusIdx].type;
-    //   const item2 = combinedList[plusIdx].type;
-    //   if (item1 === "dropdown" || item2 === "dropdown") {
-    //     return;
-    //   }
-    // }
     const newList = [...combinedList];
     //null일 경우의 조건을 추가해서 조건을 맞춤
     if (dragItem.current === null || dragOverItem.current === null) return;
@@ -209,7 +202,7 @@ export const TodoList = () => {
 
   useEffect(() => {
     getAllTodos();
-    console.log(new Date());
+    console.log(todoDay);
   }, []);
 
   return (
