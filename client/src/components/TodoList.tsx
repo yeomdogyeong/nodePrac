@@ -75,7 +75,7 @@ export const TodoList = () => {
     let todos = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key !== null) {
+      if (key !== null && key == todoDay) {
         const value = localStorage.getItem(key);
         console.log("v", value);
         if (value) {
