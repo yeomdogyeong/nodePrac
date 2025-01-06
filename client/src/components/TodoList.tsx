@@ -17,7 +17,7 @@ export const TodoList = () => {
   const [change, setChange] = useState("");
   const [value, setValue] = useState("");
   //편집해서 바뀌는 내용 state
-  const [edit, setEdit] = useState("");
+  const [edit, setEdit] = useState<string>("");
   //tag + todo 드래그 가능한 리스트 모음
   const [saveList, setSaveList] = useState<CompletedList[]>([]);
   const [combinedList, setCombinedList] = useState<CompletedList[]>(saveList);
@@ -138,6 +138,10 @@ export const TodoList = () => {
   //투두 삭제
   const handleDelete = (id: string) => {
     const newList = combinedList.filter((el) => el.id !== id);
+    if (todoDay !== null) {
+      localStorage.setItem(todoDay, JSON.stringify(newList));
+    }
+    console.log(newList);
     setCombinedList(newList);
   };
   //엔터 시 한글 두 번 중복 방지
@@ -154,14 +158,14 @@ export const TodoList = () => {
 
     if (select) {
       select.edit = true;
+      setEdit(select.contents ?? "");
       newList.splice(idx, 1, select);
     }
 
     setCombinedList(newList);
-    //select가 있으면 편집기능 on
-    // if (select) {
-    //   select.edit = true;
-    // }
+    if (todoDay !== null) {
+      localStorage.setItem(todoDay, JSON.stringify(newList));
+    }
   };
 
   const handleEditSucess = (id: string) => {
@@ -171,11 +175,16 @@ export const TodoList = () => {
 
     if (select) {
       select.edit = false;
+
       select.contents = edit;
       newList.splice(idx, 1, select);
     }
+
     console.log(select);
     setCombinedList(newList);
+    if (todoDay !== null) {
+      localStorage.setItem(todoDay, JSON.stringify(newList));
+    }
   };
 
   const editOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
