@@ -19,11 +19,11 @@ export const TodoList = () => {
   //편집해서 바뀌는 내용 state
   const [edit, setEdit] = useState<string>("");
   //tag + todo 드래그 가능한 리스트 모음
-  const [saveList, setSaveList] = useState<CompletedList[]>([]);
-  const [combinedList, setCombinedList] = useState<CompletedList[]>(saveList);
+  // const [saveList, setSaveList] = useState<CompletedList[]>([]);
+  const [combinedList, setCombinedList] = useState<CompletedList[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const todoDay = searchParams.get("day");
+  //null일 때 값 처리
+  const todoDay = searchParams.get("day") ?? "";
   const { id } = useParams();
 
   let uuid = self.crypto.randomUUID().slice(0, 6);
@@ -55,7 +55,7 @@ export const TodoList = () => {
     return JSON.stringify(value);
   };
 
-  const addTodo = async (id: string) => {
+  const addTodo = async (uuid: string) => {
     const newList = {
       id: uuid,
       contents: value,
@@ -64,9 +64,13 @@ export const TodoList = () => {
       date,
     };
     // await addDoc(collection(db, "todos"), newList);
-    const getList = goToObj(localStorage.getItem(date) || "[]");
+    console.log(newList);
+    const getList = goToObj(localStorage.getItem(todoDay) || "[]");
     getList.push(newList);
-    localStorage.setItem(date, goToJson(getList));
+    localStorage.setItem(todoDay, goToJson(getList));
+
+    setValue("");
+    setCombinedList(JSON.parse(localStorage.getItem(todoDay) ?? "[]"));
   };
 
   //로컬스토리지에서 오늘의
@@ -75,7 +79,7 @@ export const TodoList = () => {
     let todos = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key !== null && key == todoDay) {
+      if (key !== null && key === todoDay) {
         const value = localStorage.getItem(key);
         console.log("v", value);
         if (value) {
@@ -83,11 +87,13 @@ export const TodoList = () => {
         }
       }
     }
-    console.log(todos);
-    //이 부분 나중에 고쳐야함 [0]이 아니라 오늘 date로
-    setSaveList(todos[0]);
+
+    if (todos.length === 0) {
+      todos.push([]);
+    }
     setCombinedList(todos[0]);
-    console.log(saveList);
+    console.log(todos);
+    // setSaveList(todos[0]);
   };
 
   //드래그할 아이템을 집었을때
@@ -147,7 +153,7 @@ export const TodoList = () => {
   //엔터 시 한글 두 번 중복 방지
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
-      EnterTodo();
+      addTodo(uuid);
     }
   };
 

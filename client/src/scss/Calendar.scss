@@ -107,7 +107,7 @@
   // background-color: #76baff;
 }
 .react-calendar__tile.todo {
-  background-image: url("../assets/chi.jpeg");
+  background-image: url("../assets/chi3.jpg");
   background-size: cover; /* 이미지 크기 조정 */
   background-position: center; /* 이미지 위치 조정 */
   background-repeat: no-repeat; /* 반복 방지 */
@@ -127,11 +127,11 @@
   color: #cdcdcd;
 }
 
-//여기 하니까 고정된거 hover시 잘 작동
+//hover시
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   border-radius: 40% !important;
-  background-image: url("../assets/chi.jpeg");
+  background-image: url("../assets/chi3.jpg");
   background-size: cover; /* 이미지 크기 조정 */
   background-position: center; /* 이미지 위치 조정 */
   background-repeat: no-repeat; /* 반복 방지 */
@@ -159,17 +159,17 @@
 .react-calendar__tile--hasActive:enabled:focus {
   background: #a9d4ff;
 }
-//누르고 활성화되는거
+//현재 요일 색
 .react-calendar__tile--active {
-  background: yellowgreen;
+  // background: yellowgreen;
   border-radius: 40% !important;
   color: white;
 }
-//hover시
+//
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   border-radius: 40% !important;
-  background-image: url("../assets/chi.jpeg");
+  background-image: url("../assets/chi3.jpg");
   background-size: cover; /* 이미지 크기 조정 */
   background-position: center; /* 이미지 위치 조정 */
   background-repeat: no-repeat; /* 반복 방지 */

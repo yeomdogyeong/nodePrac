@@ -10,8 +10,6 @@ export const Calendars = () => {
   const [value, onChange] = useState<Value>(new Date());
   const [list, setList] = useState<string[]>([]);
   const [params, setParams] = useState<string>("");
-  // const [month, setMonth] = useState<number>(0);
-  // const [date, setDate] = useState<number>(0);
   const navigate = useNavigate();
 
   const months = [
@@ -43,14 +41,6 @@ export const Calendars = () => {
         setParams(newDate);
       }
     }
-
-    // if (value !== null) {
-    //   const slice = value !== null ? value.toString().substring(8, 10) : null;
-    //   if (slice !== null) {
-    //     const newParam = convertDay(slice);
-    //     setParams(String(newParam));
-    //   }
-    // }
   };
 
   const newDate = new Date();
