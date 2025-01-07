@@ -6,6 +6,7 @@ import { db } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import Calendar from "react-calendar";
+import { Button } from "./ui/button";
 interface CompletedList {
   id: string;
   type?: "dropdown" | null;
@@ -226,16 +227,19 @@ export const TodoList = () => {
         <div className="todo-container__header-box">
           <div className="todo-container__input-box">
             <input
-              className="todo-container__input"
+              className="todo-container__input-box-input"
               placeholder="망고에게 보낼말 입력하세요"
               value={value}
               onChange={onChangeInput}
               onKeyDown={handleKeyDown}
             />
-
-            {/* <button className="todo-container__enter-btn" onClick={EnterTodo}>
+            {/* <Button>Enter</Button> */}
+            <button
+              className="todo-container__input-box-button"
+              onClick={() => addTodo(uuid)}
+            >
               Enter!!
-            </button> */}
+            </button>
           </div>
           <div className="todo-container__place-box" onClick={plusPlace}>
             + 장소
@@ -245,7 +249,7 @@ export const TodoList = () => {
           {combinedList.map((item, idx) => (
             <div
               key={item.id}
-              className="todo-container__item"
+              className="todo-container__list__item"
               draggable
               onDragStart={(e) => dragStart(e, idx)}
               onDragEnter={(e) => dragEnter(e, idx)}
@@ -268,19 +272,14 @@ export const TodoList = () => {
                 </div>
               ) : (
                 <div className="todo" key={item.id}>
-                  <div className="todo-container__item-content">
-                    {item.contents}
-                  </div>
-                  <div className="todo-container__item-edit-box">
-                    <div
-                      className="todo-container__item-edit"
-                      onClick={() => handleEdit(item.id)}
-                    >
+                  <div className="content">{item.contents}</div>
+                  <div className="edit-box">
+                    <div className="edit" onClick={() => handleEdit(item.id)}>
                       수정
                     </div>
 
                     <div
-                      className="todo-container__item-delete"
+                      className="delete"
                       onClick={() => handleDelete(item.id)}
                     >
                       x
@@ -292,7 +291,10 @@ export const TodoList = () => {
           ))}
         </div>
         <div className="btn-box">
-          <button onClick={() => addTodo(uuid)}>console</button>
+          <Button variant="default" size="sm">
+            Test Button
+          </Button>
+
           <button onClick={() => goToAbout("calendar")}>goCalender</button>
           <button onClick={handleData}>goData!</button>
         </div>
