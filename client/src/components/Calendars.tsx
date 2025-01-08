@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "../scss/Calendar.scss";
 import { useNavigate, useSearchParams } from "react-router";
+import { Z } from "react-router/dist/development/fog-of-war-DLtn2OLr";
+import { Layout } from "./layout/Layout";
 type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -85,32 +87,34 @@ export const Calendars = () => {
   }, [params]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <Calendar
-        onChange={onChange}
-        value={value}
-        onClickDay={(value, event) => goToList(value)}
-        tileClassName={({ date }) =>
-          list.some((todoDate) => {
-            if (
-              new Date(todoDate).getMonth() === date.getMonth() &&
-              new Date(todoDate).getDate() === date.getDate()
-            ) {
-              return true;
-            }
-            return false;
-          })
-            ? "todo"
-            : null
-        }
-      />
-    </div>
+    <Layout>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "calc(100vh - 100px)",
+        }}
+      >
+        <Calendar
+          onChange={onChange}
+          value={value}
+          onClickDay={(value, event) => goToList(value)}
+          tileClassName={({ date }) =>
+            list.some((todoDate) => {
+              if (
+                new Date(todoDate).getMonth() === date.getMonth() &&
+                new Date(todoDate).getDate() === date.getDate()
+              ) {
+                return true;
+              }
+              return false;
+            })
+              ? "todo"
+              : null
+          }
+        />
+      </div>
+    </Layout>
   );
 };

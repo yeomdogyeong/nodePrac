@@ -7,6 +7,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import Calendar from "react-calendar";
 import { Button } from "./ui/button";
+import { Layout } from "./layout/Layout";
 interface CompletedList {
   id: string;
   type?: "dropdown" | null;
@@ -222,83 +223,83 @@ export const TodoList = () => {
   }, []);
 
   return (
-    <div id="todoBox">
-      <section className="todo-container">
-        <div className="todo-container__header-box">
-          <div className="todo-container__input-box">
-            <input
-              className="todo-container__input-box-input"
-              placeholder="망고에게 보낼말 입력하세요"
-              value={value}
-              onChange={onChangeInput}
-              onKeyDown={handleKeyDown}
-            />
-            {/* <Button>Enter</Button> */}
-            <button
-              className="todo-container__input-box-button"
-              onClick={() => addTodo(uuid)}
-            >
-              Enter!!
-            </button>
+    <Layout>
+      <div id="todoBox">
+        <section className="todo-container">
+          <div className="todo-container__header-box">
+            <div className="todo-container__input-box">
+              <input
+                className="todo-container__input-box-input"
+                placeholder="망고에게 보낼말 입력하세요"
+                value={value}
+                onChange={onChangeInput}
+                onKeyDown={handleKeyDown}
+              />
+              {/* <Button>Enter</Button> */}
+              <button
+                className="todo-container__input-box-button"
+                onClick={() => addTodo(uuid)}
+              >
+                Enter!!
+              </button>
+            </div>
+            <div className="todo-container__place-box" onClick={plusPlace}>
+              + 장소
+            </div>
           </div>
-          <div className="todo-container__place-box" onClick={plusPlace}>
-            + 장소
-          </div>
-        </div>
-        <div className="todo-container__list">
-          {combinedList.map((item, idx) => (
-            <div
-              key={item.id}
-              className="todo-container__list__item"
-              draggable
-              onDragStart={(e) => dragStart(e, idx)}
-              onDragEnter={(e) => dragEnter(e, idx)}
-              onDragEnd={(e) => drop(e)}
-              onDragOver={(e) => e.preventDefault()}
-            >
-              {item.type === "dropdown" ? (
-                <div key={item.id} className="drop">
-                  <Dropdown deleteDrop={() => deleteDrop(item.id)} />
-                </div>
-              ) : item.edit ? (
-                <div className="edit">
-                  <input value={edit} onChange={(e) => editOnChange(e)} />
-                  <button
-                    className="todo-container__item-edit-success"
-                    onClick={() => handleEditSucess(item.id)}
-                  >
-                    완료
-                  </button>
-                </div>
-              ) : (
-                <div className="todo" key={item.id}>
-                  <div className="content">{item.contents}</div>
-                  <div className="edit-box">
-                    <div className="edit" onClick={() => handleEdit(item.id)}>
-                      수정
-                    </div>
-
-                    <div
-                      className="delete"
-                      onClick={() => handleDelete(item.id)}
+          <div className="todo-container__list">
+            {combinedList.map((item, idx) => (
+              <div
+                key={item.id}
+                className="todo-container__list__item"
+                draggable
+                onDragStart={(e) => dragStart(e, idx)}
+                onDragEnter={(e) => dragEnter(e, idx)}
+                onDragEnd={(e) => drop(e)}
+                onDragOver={(e) => e.preventDefault()}
+              >
+                {item.type === "dropdown" ? (
+                  <div key={item.id} className="drop">
+                    <Dropdown deleteDrop={() => deleteDrop(item.id)} />
+                  </div>
+                ) : item.edit ? (
+                  <div className="edit">
+                    <input value={edit} onChange={(e) => editOnChange(e)} />
+                    <button
+                      className="todo-container__item-edit-success"
+                      onClick={() => handleEditSucess(item.id)}
                     >
-                      x
+                      완료
+                    </button>
+                  </div>
+                ) : (
+                  <div className="todo" key={item.id}>
+                    <div className="content">{item.contents}</div>
+                    <div className="edit-box">
+                      <div className="edit" onClick={() => handleEdit(item.id)}>
+                        수정
+                      </div>
+
+                      <div
+                        className="delete"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        x
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="btn-box">
-          <Button variant="default" size="sm">
-            Test Button
-          </Button>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="btn-box">
+            <Button>Test Button</Button>
 
-          <button onClick={() => goToAbout("calendar")}>goCalender</button>
-          <button onClick={handleData}>goData!</button>
-        </div>
-      </section>
-    </div>
+            <button onClick={() => goToAbout("calendar")}>goCalender</button>
+            <button onClick={handleData}>goData!</button>
+          </div>
+        </section>
+      </div>
+    </Layout>
   );
 };
