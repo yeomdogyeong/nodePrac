@@ -1,8 +1,47 @@
 .header {
   //   border-bottom: 1px solid darkgray;
-  height: 50px;
-  background-color: rgb(193, 95, 95);
-  color: #e0e0e0;
+  height: 47px;
+  background-color: #eeeeee;
+  color: black;
   display: flex;
   align-items: center;
+
+  &.dark {
+    background-color: #2b2b2b;
+    color: white;
+  }
+
+  .home-box {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+  }
+
+  .title {
+    padding-left: 34px;
+  }
+
+  .btn-box {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+    .btn {
+      cursor: pointer;
+      display: flex;
+      outline: none;
+      border: none;
+      background: none;
+      .my-icon {
+        color: rgb(215, 195, 43);
+      }
+    }
+  }
+}
+
+.header2 {
+  height: 3px;
+  background-color: rgb(193, 95, 95);
+  &.dark {
+    background-color: rgb(169, 82, 82);
+  }
 }

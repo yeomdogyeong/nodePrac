@@ -30,12 +30,11 @@ export const TodoList = () => {
 
   let uuid = self.crypto.randomUUID().slice(0, 6);
   const newDate = new Date();
-  const newDateSlice = newDate.toString().substring(0, 15);
   const year = newDate.getFullYear();
   const month = newDate.getMonth() + 1;
-
   const day = newDate.getDate();
   const date = `${year}-${month}-${day}`;
+  const newDateSlice = newDate.toString().substring(0, 15);
 
   //드래그할 아이템의 인덱스
   const dragItem = useRef<number | null>(null);
@@ -293,10 +292,10 @@ export const TodoList = () => {
             ))}
           </div>
           <div className="btn-box">
-            <Button>Test Button</Button>
+            {/* <Button>Test Button</Button>
 
             <button onClick={() => goToAbout("calendar")}>goCalender</button>
-            <button onClick={handleData}>goData!</button>
+            <button onClick={handleData}>goData!</button> */}
           </div>
         </section>
       </div>

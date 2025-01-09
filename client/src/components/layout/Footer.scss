@@ -1,4 +1,38 @@
 .footer {
-  border-top: 1px solid darkgray;
   height: 50px;
+  background-color: rgb(193, 95, 95);
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  .btn-box {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+    .btn {
+      cursor: pointer;
+      display: flex;
+      outline: none;
+      border: none;
+      background: none;
+      .my-icon {
+        color: rgb(215, 195, 43);
+      }
+    }
+  }
+  .img-box {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    gap: 3px;
+
+    .imgUrl {
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      margin: 0 5px;
+    }
+  }
 }
