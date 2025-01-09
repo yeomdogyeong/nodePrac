@@ -1,5 +1,15 @@
-container {
+.container {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  //   display: flex;
+  //   flex-direction: column;
+
+  background-color: #e0e0e0;
+  color: #626161;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  // 다크 모드 스타일
+  &.dark {
+    background-color: #626161;
+    color: #f5f5f5;
+  }
 }

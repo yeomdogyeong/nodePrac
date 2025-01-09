@@ -4,15 +4,18 @@ import { TodoList } from "./components/TodoList";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { Calendars } from "./components/Calendars";
 import { Home } from "./components/Home";
+import { ThemeProvider } from "./theme/ThemeProvider";
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/todo" element={<TodoList />} />
-        <Route path="/calendar" element={<Calendars />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/todo" element={<TodoList />} />
+          <Route path="/calendar" element={<Calendars />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
