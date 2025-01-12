@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import { Calendars } from "./components/Calendars";
 import { Home } from "./components/Home";
 import { ThemeProvider } from "./theme/ThemeProvider";
+import "./scss/font.scss";
 function App() {
   return (
     <ThemeProvider>
