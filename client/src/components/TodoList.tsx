@@ -145,8 +145,16 @@ export const TodoList = () => {
   //투두 삭제
   const handleDelete = (id: string) => {
     const newList = combinedList.filter((el) => el.id !== id);
+    //이거 뭐지?
     if (todoDay !== null) {
       localStorage.setItem(todoDay, JSON.stringify(newList));
+    }
+    if (newList.length === 0) {
+      for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) === todoDay) {
+          localStorage.removeItem(todoDay);
+        }
+      }
     }
     console.log(newList);
     setCombinedList(newList);

@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <>
       <div className={`header ${isDarkMode ? "dark" : ""}`}>
-        <div className="home-box" onClick={() => goToAbout("")}>
+        <div className="home-box" onClick={() => goToAbout("/")}>
           <HomeSharpIcon />
         </div>
         <div
@@ -33,7 +33,7 @@ export const Header = () => {
           오늘은 {date} !
         </div>
         <div className="btn-box">
-          <button className="btn" onClick={() => goToAbout("calendar")}>
+          <button className="btn" onClick={() => goToAbout("/todo/calendar")}>
             <CalendarMonthSharpIcon />
           </button>
         </div>

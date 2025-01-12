@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/todo" element={<TodoList />} />
-          <Route path="/calendar" element={<Calendars />} />
+          <Route path="/todo/calendar" element={<Calendars />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
