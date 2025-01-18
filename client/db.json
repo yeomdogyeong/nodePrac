@@ -1,0 +1,208 @@
+{
+  "electronics": [
+    {
+      "id": 1,
+      "name": "Smartphone",
+      "category": "Electronics",
+      "description": "Latest model with high performance",
+      "price": 899.99,
+      "image": "https://example.com/images/smartphone.jpg",
+      "stock": 50,
+      "rating": 4.5,
+      "reviews": [
+        {
+          "user": "JohnDoe",
+          "rating": 5,
+          "comment": "Excellent phone, great performance!"
+        },
+        {
+          "user": "JaneSmith",
+          "rating": 4,
+          "comment": "Good phone but a bit pricey."
+        }
+      ],
+      "options": [
+        {
+          "size": "64GB",
+          "price": 899.99
+        },
+        {
+          "size": "128GB",
+          "price": 999.99
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Laptop",
+      "category": "Electronics",
+      "description": "Powerful laptop for gaming and work",
+      "price": 1299.99,
+      "image": "https://example.com/images/laptop.jpg",
+      "stock": 30,
+      "rating": 4.7,
+      "reviews": [
+        {
+          "user": "MarkBrown",
+          "rating": 5,
+          "comment": "This laptop handles everything I throw at it!"
+        },
+        {
+          "user": "EmilyDavis",
+          "rating": 4,
+          "comment": "Great laptop but a bit heavy."
+        }
+      ],
+      "options": [
+        {
+          "color": "Black",
+          "price": 1299.99
+        },
+        {
+          "color": "Silver",
+          "price": 1399.99
+        }
+      ]
+    }
+  ],
+  "food": [
+    {
+      "id": 1,
+      "name": "Pizza Margherita",
+      "category": "Food",
+      "description": "Classic pizza with fresh tomatoes, mozzarella, and basil",
+      "price": 12.99,
+      "image": "https://example.com/images/pizza.jpg",
+      "stock": 200,
+      "rating": 4.8,
+      "reviews": [
+        {
+          "user": "PizzaLover123",
+          "rating": 5,
+          "comment": "The best pizza I've ever had!"
+        },
+        {
+          "user": "Foodie89",
+          "rating": 4,
+          "comment": "Tasty, but could use more cheese."
+        }
+      ],
+      "options": [
+        {
+          "size": "Small",
+          "price": 12.99
+        },
+        {
+          "size": "Medium",
+          "price": 15.99
+        },
+        {
+          "size": "Large",
+          "price": 18.99
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sushi Set",
+      "category": "Food",
+      "description": "Fresh sushi rolls with fish and vegetables",
+      "price": 19.99,
+      "image": "https://example.com/images/sushi.jpg",
+      "stock": 150,
+      "rating": 4.6,
+      "reviews": [
+        {
+          "user": "SushiFan",
+          "rating": 5,
+          "comment": "Delicious and fresh sushi!"
+        },
+        {
+          "user": "SeafoodLover",
+          "rating": 4,
+          "comment": "Good sushi, but the rice was a bit too sticky."
+        }
+      ],
+      "options": [
+        {
+          "size": "8 pieces",
+          "price": 19.99
+        },
+        {
+          "size": "12 pieces",
+          "price": 24.99
+        }
+      ]
+    }
+  ],
+  "pets": [
+    {
+      "id": 1,
+      "name": "Cat Toy",
+      "category": "Pets",
+      "description": "Interactive toy for cats",
+      "price": 7.99,
+      "image": "https://example.com/images/cat_toy.jpg",
+      "stock": 100,
+      "rating": 4.7,
+      "reviews": [
+        {
+          "user": "CatLover22",
+          "rating": 5,
+          "comment": "My cat loves this toy!"
+        },
+        {
+          "user": "PetOwner567",
+          "rating": 4,
+          "comment": "Great toy, but it could be a bit sturdier."
+        }
+      ],
+      "options": [
+        {
+          "color": "Red",
+          "price": 7.99
+        },
+        {
+          "color": "Blue",
+          "price": 8.49
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Dog Bed",
+      "category": "Pets",
+      "description": "Comfortable bed for your dog to relax",
+      "price": 49.99,
+      "image": "https://example.com/images/dog_bed.jpg",
+      "stock": 50,
+      "rating": 4.9,
+      "reviews": [
+        {
+          "user": "DogMom123",
+          "rating": 5,
+          "comment": "My dog loves this bed, perfect for naps!"
+        },
+        {
+          "user": "PuppyLover",
+          "rating": 5,
+          "comment": "Soft and spacious, my dog sleeps soundly every night."
+        }
+      ],
+      "options": [
+        {
+          "size": "Small",
+          "price": 49.99
+        },
+        {
+          "size": "Medium",
+          "price": 59.99
+        },
+        {
+          "size": "Large",
+          "price": 69.99
+        }
+      ]
+    }
+  ]
+}

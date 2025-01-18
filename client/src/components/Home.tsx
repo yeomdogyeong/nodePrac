@@ -9,7 +9,9 @@ export const Home = () => {
       <button onClick={() => goToAbout(`todo?day=${date}`)}>
         TodoList 바로가기
       </button>
-      <button>ShoppingList 바로가기</button>
+      <button onClick={() => goToAbout(`/shopping`)}>
+        ShoppingList 바로가기
+      </button>
     </div>
   );
 };

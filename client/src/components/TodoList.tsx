@@ -145,13 +145,15 @@ export const TodoList = () => {
   //투두 삭제
   const handleDelete = (id: string) => {
     const newList = combinedList.filter((el) => el.id !== id);
-    //이거 뭐지?
+    //삭제된 배열 로컬스토리지에 적용 + todoDay이 null이 아니라는거 인증
     if (todoDay !== null) {
       localStorage.setItem(todoDay, JSON.stringify(newList));
     }
+    //빈배열일때 localStorage에서 해당 키,밸류 삭제
     if (newList.length === 0) {
       for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) === todoDay) {
+        const key = localStorage.key(i);
+        if (key === todoDay) {
           localStorage.removeItem(todoDay);
         }
       }
