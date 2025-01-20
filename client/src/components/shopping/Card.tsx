@@ -8,6 +8,8 @@ import { ShopAxios } from "@/axios/axios";
 import { useState, useEffect } from "react";
 import "./Card.scss";
 import { Height } from "@mui/icons-material";
+import { useNavigator } from "@/util/useNavigator";
+
 interface ItemType {
   category: string;
   description: string;
@@ -38,15 +40,19 @@ export default function ActionAreaCard() {
     setPets(pets);
     setCombination(newList);
   };
-
+  const navigate = useNavigator();
   useEffect(() => {
     mango();
   }, []);
 
   return (
     <div className="card">
-      {combination.map((el: ItemType) => (
-        <div className="card_container" key={el.id}>
+      {combination.map((el: ItemType, idx) => (
+        <div
+          className="card_container"
+          key={idx}
+          onClick={() => navigate("/shoppingDetail")}
+        >
           <Card>
             <CardActionArea>
               <CardMedia component="img" image="/chi.jpeg" alt="chiiiie" />

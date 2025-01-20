@@ -6,5 +6,5 @@ export const useNavigator = () => {
     navigate(`${route}`);
   };
 
-  return { goToAbout };
+  return goToAbout;
 };

@@ -7,6 +7,7 @@ import { Home } from "./components/Home";
 import { ThemeProvider } from "./theme/ThemeProvider";
 import "./scss/font.scss";
 import { ShopHome } from "./components/shopping/ShopHome";
+import { DetailPage } from "./components/shopping/DetailPage";
 function App() {
   return (
     <ThemeProvider>
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shopping" element={<ShopHome />} />
+          <Route path="/shoppingDetail" element={<DetailPage />} />
           <Route path="/todo" element={<TodoList />} />
           <Route path="/todo/calendar" element={<Calendars />} />
         </Routes>

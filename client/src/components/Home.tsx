@@ -2,7 +2,7 @@ import "@/scss/Home.scss";
 import { useDate } from "@/util/useDate";
 import { useNavigator } from "@/util/useNavigator";
 export const Home = () => {
-  const { goToAbout } = useNavigator();
+  const goToAbout = useNavigator();
   const date = useDate();
   return (
     <div className="home-container">
