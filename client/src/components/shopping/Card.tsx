@@ -19,7 +19,12 @@ interface ItemType {
   options: Array<{ size: string; price: number }>;
   price: number;
   rating: number;
-  review: Array<{ user: string; rating: number; comment: string }>;
+  review: Array<{
+    user: string;
+    rating: number;
+    comment: string;
+    replies: Array<{ user: string; comment: string }>;
+  }>;
   stock: string;
 }
 
@@ -28,16 +33,18 @@ export default function ActionAreaCard() {
   const [food, setFood] = useState<ItemType[]>([]);
   const [pets, setPets] = useState<ItemType[]>([]);
   const [combination, setCombination] = useState<ItemType[]>([]);
+
   const mango = async () => {
     const res = (await ShopAxios.get("/data")).data;
     console.log(res);
-    const electronic = res.electronics;
-    const food = res.food;
-    const pets = res.pets;
-    const newList = [...electronic, ...food, ...pets];
+    // const electronic = res.electronics;
+    // const food = res.food;
+    // const pets = res.pets;
+    const { electronics, food, pets } = res;
     setElectronic(electronic);
     setFood(food);
     setPets(pets);
+    const newList = [...electronics, ...food, ...pets];
     setCombination(newList);
   };
   const navigate = useNavigator();
@@ -47,11 +54,11 @@ export default function ActionAreaCard() {
 
   return (
     <div className="card">
-      {combination.map((el: ItemType, idx) => (
+      {combination.map((el: ItemType) => (
         <div
           className="card_container"
-          key={idx}
-          onClick={() => navigate("/shoppingDetail")}
+          key={el.id}
+          onClick={() => navigate(`/shoppingItem?item=${el.id}`)}
         >
           <Card>
             <CardActionArea>

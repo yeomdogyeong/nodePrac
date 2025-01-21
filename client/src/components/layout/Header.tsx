@@ -10,7 +10,7 @@ import { useDate } from "@/util/useDate";
 useNavigator;
 export const Header = () => {
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
-  const { goToAbout } = useNavigator();
+  const goToAbout = useNavigator();
   // const newDate = new Date();
   // const year = newDate.getFullYear();
   // const month = newDate.getMonth() + 1;
