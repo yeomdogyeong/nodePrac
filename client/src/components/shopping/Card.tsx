@@ -57,8 +57,10 @@ export default function ActionAreaCard() {
       {combination.map((el: ItemType) => (
         <div
           className="card_container"
-          key={el.id}
-          onClick={() => navigate(`/shoppingItem?item=${el.id}`)}
+          key={`${el.category}-${el.id}`}
+          onClick={() =>
+            navigate(`/shoppingItem?category=${el.category}&item=${el.id}`)
+          }
         >
           <Card>
             <CardActionArea>

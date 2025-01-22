@@ -14,28 +14,22 @@
           {
             "user": "JohnDoe",
             "rating": 5,
-            "comment": "Excellent phone, great performance!",
-            "replies": [
-              {
-                "user": "JaneSmith",
-                "comment": "I agree, it's super fast!"
-              },
-              {
-                "user": "TechGuru99",
-                "comment": "Battery life could be better though."
-              }
-            ]
+            "comment": "Excellent phone, great performance!"
           },
           {
-            "user": "EmilyDavis",
+            "user": "JaneSmith",
             "rating": 4,
-            "comment": "Good phone but a bit pricey.",
-            "replies": [
-              {
-                "user": "BudgetBuyer",
-                "comment": "Totally agree, but it's worth it."
-              }
-            ]
+            "comment": "Good phone but a bit pricey."
+          }
+        ],
+        "options": [
+          {
+            "size": "64GB",
+            "price": 899.99
+          },
+          {
+            "size": "128GB",
+            "price": 999.99
           }
         ]
       },
@@ -52,31 +46,29 @@
           {
             "user": "MarkBrown",
             "rating": 5,
-            "comment": "This laptop handles everything I throw at it!",
-            "replies": [
-              {
-                "user": "EmilyDavis",
-                "comment": "Does it run smoothly for video editing too?"
-              }
-            ]
+            "comment": "This laptop handles everything I throw at it!"
           },
           {
-            "user": "GamerPro",
+            "user": "EmilyDavis",
             "rating": 4,
-            "comment": "Great laptop, but it gets a bit hot during gaming.",
-            "replies": [
-              {
-                "user": "TechSupport",
-                "comment": "You might want to get a cooling pad!"
-              }
-            ]
+            "comment": "Great laptop but a bit heavy."
+          }
+        ],
+        "options": [
+          {
+            "color": "Black",
+            "price": 1299.99
+          },
+          {
+            "color": "Silver",
+            "price": 1399.99
           }
         ]
       }
     ],
     "food": [
       {
-        "id": 3,
+        "id": 1,
         "name": "Pizza Margherita",
         "category": "Food",
         "description": "Classic pizza with fresh tomatoes, mozzarella, and basil",
@@ -88,31 +80,65 @@
           {
             "user": "PizzaLover123",
             "rating": 5,
-            "comment": "The best pizza I've ever had!",
-            "replies": [
-              {
-                "user": "Foodie89",
-                "comment": "Totally agree, it's amazing!"
-              }
-            ]
+            "comment": "The best pizza I've ever had!"
           },
           {
-            "user": "GourmetGal",
+            "user": "Foodie89",
             "rating": 4,
-            "comment": "Really good, but could use more basil.",
-            "replies": [
-              {
-                "user": "ChefMike",
-                "comment": "You can always add fresh basil at home!"
-              }
-            ]
+            "comment": "Tasty, but could use more cheese."
+          }
+        ],
+        "options": [
+          {
+            "size": "Small",
+            "price": 12.99
+          },
+          {
+            "size": "Medium",
+            "price": 15.99
+          },
+          {
+            "size": "Large",
+            "price": 18.99
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Sushi Set",
+        "category": "Food",
+        "description": "Fresh sushi rolls with fish and vegetables",
+        "price": 19.99,
+        "image": "https://example.com/images/sushi.jpg",
+        "stock": 150,
+        "rating": 4.6,
+        "reviews": [
+          {
+            "user": "SushiFan",
+            "rating": 5,
+            "comment": "Delicious and fresh sushi!"
+          },
+          {
+            "user": "SeafoodLover",
+            "rating": 4,
+            "comment": "Good sushi, but the rice was a bit too sticky."
+          }
+        ],
+        "options": [
+          {
+            "size": "8 pieces",
+            "price": 19.99
+          },
+          {
+            "size": "12 pieces",
+            "price": 24.99
           }
         ]
       }
     ],
     "pets": [
       {
-        "id": 4,
+        "id": 1,
         "name": "Cat Toy",
         "category": "Pets",
         "description": "Interactive toy for cats",
@@ -150,7 +176,7 @@
         ]
       },
       {
-        "id": 5,
+        "id": 2,
         "name": "Dog Bed",
         "category": "Pets",
         "description": "Comfortable bed for your dog to relax",
@@ -184,7 +210,7 @@
         ]
       },
       {
-        "id": 6,
+        "id": 3,
         "name": "Pet Grooming Kit",
         "category": "Pets",
         "description": "All-in-one grooming tools for your pet's hygiene",
