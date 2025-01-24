@@ -33,11 +33,12 @@ export const DetailPage = () => {
     setElectronics(electronics);
     console.log(electronics);
   };
-
+  //이걸 따로 빼줬음
+  //처음 렌더링 시에만 실행
   useEffect(() => {
     handleData();
   }, []);
-
+  //electronics나 category가 바뀔때만 실행
   useEffect(() => {
     console.log(item);
     console.log(category);
@@ -55,6 +56,7 @@ export const DetailPage = () => {
       <div>name and rating</div>
       <div>dropdown & description</div>
       <div>댓글들</div>
+      <div>기타 etc</div>
     </div>
   );
 };
