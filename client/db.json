@@ -75,7 +75,7 @@
         "price": 12.99,
         "image": "https://example.com/images/pizza.jpg",
         "stock": 200,
-        "rating": 4.8,
+        "rating": 2.8,
         "reviews": [
           {
             "user": "PizzaLover123",
@@ -111,7 +111,7 @@
         "price": 19.99,
         "image": "https://example.com/images/sushi.jpg",
         "stock": 150,
-        "rating": 4.6,
+        "rating": 1.6,
         "reviews": [
           {
             "user": "SushiFan",
@@ -145,7 +145,7 @@
         "price": 7.99,
         "image": "https://example.com/images/cat_toy.jpg",
         "stock": 100,
-        "rating": 4.7,
+        "rating": 2.7,
         "reviews": [
           {
             "user": "CatLover22",
@@ -183,7 +183,7 @@
         "price": 49.99,
         "image": "https://example.com/images/dog_bed.jpg",
         "stock": 50,
-        "rating": 4.9,
+        "rating": 3.9,
         "reviews": [
           {
             "user": "DogMom123",
@@ -217,7 +217,7 @@
         "price": 29.99,
         "image": "https://example.com/images/grooming_kit.jpg",
         "stock": 75,
-        "rating": 4.5,
+        "rating": 1.5,
         "reviews": [
           {
             "user": "GroomingExpert",

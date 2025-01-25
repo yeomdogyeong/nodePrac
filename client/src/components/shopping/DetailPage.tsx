@@ -4,6 +4,10 @@ import chieka from "../../assets/chi1.jpeg";
 import "./DetailPage.scss";
 import { ShopAxios } from "@/axios/axios";
 import { CategoryOutlined } from "@mui/icons-material";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
+import { Star } from "lucide-react";
 interface ItemType {
   category: string;
   description: string;
@@ -31,6 +35,7 @@ export const DetailPage = () => {
   const category = searchParams.get("category");
   const item = Number(searchParams.get("item")) - 1;
   const [isLoading, setIsLoading] = useState(true);
+  const [rating, setRating] = useState<number>();
   const handleData = async () => {
     try {
       const res = await (await ShopAxios("/data")).data;
@@ -43,6 +48,31 @@ export const DetailPage = () => {
     } finally {
       setIsLoading(false); // 로딩 완료
     }
+  };
+
+  const handleStar = (props: number) => {
+    const score = Math.floor(props);
+    const arr = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= score) {
+        arr.push(1);
+      } else {
+        arr.push(0);
+      }
+    }
+    console.log("arr", arr);
+
+    return arr.map((el) =>
+      el === 1 ? (
+        <div>
+          <StarIcon />
+        </div>
+      ) : (
+        <div>
+          <StarBorderIcon />
+        </div>
+      )
+    );
   };
 
   //이걸 따로 빼줬음
@@ -84,12 +114,10 @@ export const DetailPage = () => {
   return (
     <div className="detail-container">
       <img src={chieka} />
-      {/* <div>
-        <div>{list[item].name}</div>
-        <div>{list[item].rating}</div>
-      </div> */}
-      {list && list[item].category}
-      {list && list[item].name}
+      {list[item].category}
+      {list[item].name}
+      <div>{handleStar(list[item].rating)}</div>
+      {list[item].options.map((el) => el.size)}
       <div>name and rating</div>
       <div>dropdown & description</div>
       <div>댓글들</div>
