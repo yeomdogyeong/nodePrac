@@ -8,6 +8,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import { Star } from "lucide-react";
+import { SelectBox } from "./SelectBox";
 interface ItemType {
   category: string;
   description: string;
@@ -26,6 +27,9 @@ interface ItemType {
   stock: string;
 }
 
+const ONE_STAR = 1;
+const BORDER_STAR = 0;
+
 export const DetailPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [electronics, setElectronics] = useState<ItemType[]>([]);
@@ -36,6 +40,11 @@ export const DetailPage = () => {
   const item = Number(searchParams.get("item")) - 1;
   const [isLoading, setIsLoading] = useState(true);
   const [rating, setRating] = useState<number>();
+  const [select, setSelect] = useState<string>();
+
+  const [selectedValue, setSelectedValue] = useState<number | undefined>(
+    undefined
+  );
   const handleData = async () => {
     try {
       const res = await (await ShopAxios("/data")).data;
@@ -50,20 +59,24 @@ export const DetailPage = () => {
     }
   };
 
+  const handleSelect = (id: any) => {
+    setSelect(id);
+  };
+
   const handleStar = (props: number) => {
     const score = Math.floor(props);
     const arr = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= score) {
-        arr.push(1);
+        arr.push(ONE_STAR);
       } else {
-        arr.push(0);
+        arr.push(BORDER_STAR);
       }
     }
     console.log("arr", arr);
 
     return arr.map((el) =>
-      el === 1 ? (
+      el === ONE_STAR ? (
         <div>
           <StarIcon />
         </div>
@@ -116,8 +129,23 @@ export const DetailPage = () => {
       <img src={chieka} />
       {list[item].category}
       {list[item].name}
-      <div>{handleStar(list[item].rating)}</div>
-      {list[item].options.map((el) => el.size)}
+      {handleStar(list[item].rating)}
+
+      {/* {list[item].options.map((el, idx) => (
+        <div className="select-container" key={`option-${idx}`}>
+          {el.size}
+        </div>
+      ))} */}
+      <SelectBox
+        selectedValue={selectedValue}
+        onSelect={(v) => setSelectedValue(v)}
+        options={[
+          { value: 1, label: "number-1" },
+          { value: 2, label: "number-2" },
+          { value: 3, label: "number-3" },
+        ]}
+      />
+
       <div>name and rating</div>
       <div>dropdown & description</div>
       <div>댓글들</div>
