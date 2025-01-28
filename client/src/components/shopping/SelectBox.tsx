@@ -28,7 +28,7 @@ export const SelectBox = (props: Props) => {
 
   const selectedOptions = useMemo(
     () => options.find((option) => option === selectedValue),
-    []
+    [selectedValue]
   );
 
   return (
