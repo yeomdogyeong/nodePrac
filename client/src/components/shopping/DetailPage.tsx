@@ -9,6 +9,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import { Star } from "lucide-react";
 import { SelectBox } from "./SelectBox";
+import s from "./DetailPage.module.scss";
 interface ItemType {
   category: string;
   description: string;
@@ -42,9 +43,9 @@ export const DetailPage = () => {
   const [rating, setRating] = useState<number>();
   const [select, setSelect] = useState<string>();
 
-  const [selectedValue, setSelectedValue] = useState<number | undefined>(
-    undefined
-  );
+  const [selectedValue, setSelectedValue] = useState<
+    string | number | undefined
+  >(undefined);
   const handleData = async () => {
     try {
       const res = await (await ShopAxios("/data")).data;
@@ -129,21 +130,12 @@ export const DetailPage = () => {
       <img src={chieka} />
       {list[item].category}
       {list[item].name}
-      {handleStar(list[item].rating)}
+      <div className={s.ratingBox}>{handleStar(list[item].rating)}</div>
 
-      {/* {list[item].options.map((el, idx) => (
-        <div className="select-container" key={`option-${idx}`}>
-          {el.size}
-        </div>
-      ))} */}
       <SelectBox
         selectedValue={selectedValue}
         onSelect={(v) => setSelectedValue(v)}
-        options={[
-          { value: 1, label: "number-1" },
-          { value: 2, label: "number-2" },
-          { value: 3, label: "number-3" },
-        ]}
+        options={list[item].options.map((el) => el.size)}
       />
 
       <div>name and rating</div>
