@@ -19,11 +19,11 @@ interface ItemType {
   options: Array<{ size: string; price: number }>;
   price: number;
   rating: number;
-  review: Array<{
+  reviews: Array<{
     user: string;
     rating: number;
     comment: string;
-    replies: Array<{ user: string; comment: string }>;
+    replies: Array<{ user: string; comment: string; id: number }>;
   }>;
   stock: string;
 }
@@ -40,10 +40,13 @@ export const DetailPage = () => {
   const category = searchParams.get("category");
   const item = Number(searchParams.get("item")) - 1;
   const [isLoading, setIsLoading] = useState(true);
-  const [rating, setRating] = useState<number>();
   const [select, setSelect] = useState<string>();
-
+  const [moreComment, setMoreComment] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedValue, setSelectedValue] = useState<
+    string | number | undefined
+  >(undefined);
+  const [selectedValue2, setSelectedValue2] = useState<
     string | number | undefined
   >(undefined);
   const handleData = async () => {
@@ -57,6 +60,14 @@ export const DetailPage = () => {
       console.error("Failed to load data:", error);
     } finally {
       setIsLoading(false); // 로딩 완료
+    }
+  };
+
+  const handleMoreComment = (id: number) => {
+    if (id === selectedId) {
+      setSelectedId(null);
+    } else {
+      setSelectedId(id);
     }
   };
 
@@ -126,20 +137,57 @@ export const DetailPage = () => {
   }
 
   return (
-    <div className="detail-container">
+    <div className={s.detailContainer}>
       <img src={chieka} />
-      {list[item].category}
-      {list[item].name}
+      <div>{list[item].category}</div>
+      <div>{list[item].name}</div>
       <div className={s.ratingBox}>{handleStar(list[item].rating)}</div>
-
-      <SelectBox
-        selectedValue={selectedValue}
-        onSelect={(v) => setSelectedValue(v)}
-        options={list[item].options.map((el) => el.size)}
-      />
-
-      <div>name and rating</div>
-      <div>dropdown & description</div>
+      <div className={s.selectContainer}>
+        <div className={s.selectBox}>
+          <div> 크기 : </div>
+          <div>
+            <SelectBox
+              selectedValue={selectedValue}
+              onSelect={(v) => setSelectedValue(v)}
+              options={list[item].options.map((el) => el.size)}
+            />
+          </div>
+        </div>
+        <div className={s.selectBox}>
+          <div> 가격 : </div>
+          <div>
+            <SelectBox
+              selectedValue={selectedValue2}
+              onSelect={(v) => setSelectedValue2(v)}
+              options={list[item].options.map((el) => el.price)}
+            />
+          </div>
+          <div>재고 : {list[item].stock}</div>
+        </div>
+      </div>
+      <div>
+        {list[item].reviews.map((el) => (
+          <div>
+            <div className={s.commentBox}>
+              <div>ID: {el.user}</div>
+              <div>: {el.comment}</div>
+            </div>
+            <div>
+              {el.replies.map((reply) => (
+                <div key={reply.id}>
+                  {selectedId === reply.id ? (
+                    <div>{reply.comment}</div>
+                  ) : (
+                    <button onClick={() => handleMoreComment(reply.id)}>
+                      [답글보기]
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
       <div>댓글들</div>
       <div>기타 etc</div>
     </div>

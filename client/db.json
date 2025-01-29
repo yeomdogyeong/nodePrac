@@ -14,12 +14,31 @@
           {
             "user": "JohnDoe",
             "rating": 5,
-            "comment": "Excellent phone, great performance!"
+            "comment": "Excellent phone, great performance!",
+            "replies": [
+              {
+                "id": 101,
+                "user": "TechGuru",
+                "comment": "Totally agree, it’s a solid device."
+              },
+              {
+                "id": 102,
+                "user": "MobileFan",
+                "comment": "The battery life is impressive too!"
+              }
+            ]
           },
           {
             "user": "JaneSmith",
             "rating": 4,
-            "comment": "Good phone but a bit pricey."
+            "comment": "Good phone but a bit pricey.",
+            "replies": [
+              {
+                "id": 103,
+                "user": "BudgetBuyer",
+                "comment": "Yeah, I wish it was more affordable."
+              }
+            ]
           }
         ],
         "options": [
@@ -46,12 +65,26 @@
           {
             "user": "MarkBrown",
             "rating": 5,
-            "comment": "This laptop handles everything I throw at it!"
+            "comment": "This laptop handles everything I throw at it!",
+            "replies": [
+              {
+                "id": 201,
+                "user": "Gamer101",
+                "comment": "Right? Perfect for gaming and streaming!"
+              }
+            ]
           },
           {
             "user": "EmilyDavis",
             "rating": 4,
-            "comment": "Great laptop but a bit heavy."
+            "comment": "Great laptop but a bit heavy.",
+            "replies": [
+              {
+                "id": 202,
+                "user": "WorkPro",
+                "comment": "True, but the performance makes up for it."
+              }
+            ]
           }
         ],
         "options": [
@@ -80,12 +113,26 @@
           {
             "user": "PizzaLover123",
             "rating": 5,
-            "comment": "The best pizza I've ever had!"
+            "comment": "The best pizza I've ever had!",
+            "replies": [
+              {
+                "id": 301,
+                "user": "FoodCritic",
+                "comment": "Totally agree, it’s perfection!"
+              }
+            ]
           },
           {
             "user": "Foodie89",
             "rating": 4,
-            "comment": "Tasty, but could use more cheese."
+            "comment": "Tasty, but could use more cheese.",
+            "replies": [
+              {
+                "id": 302,
+                "user": "CheeseLover",
+                "comment": "More cheese always makes it better!"
+              }
+            ]
           }
         ],
         "options": [
@@ -116,12 +163,26 @@
           {
             "user": "SushiFan",
             "rating": 5,
-            "comment": "Delicious and fresh sushi!"
+            "comment": "Delicious and fresh sushi!",
+            "replies": [
+              {
+                "id": 401,
+                "user": "SeafoodLover",
+                "comment": "I agree, it’s so fresh!"
+              }
+            ]
           },
           {
             "user": "SeafoodLover",
             "rating": 4,
-            "comment": "Good sushi, but the rice was a bit too sticky."
+            "comment": "Good sushi, but the rice was a bit too sticky.",
+            "replies": [
+              {
+                "id": 402,
+                "user": "RiceExpert",
+                "comment": "That’s true, but the flavor is amazing."
+              }
+            ]
           }
         ],
         "options": [
@@ -153,10 +214,12 @@
             "comment": "My cat loves this toy!",
             "replies": [
               {
+                "id": 501,
                 "user": "PetExpert",
                 "comment": "Same here, my cats can't stop playing with it!"
               },
               {
+                "id": 502,
                 "user": "ToyCritic",
                 "comment": "It’s durable too, which is a big plus."
               }
@@ -168,12 +231,14 @@
             "comment": "Great toy, but it could be a bit sturdier.",
             "replies": [
               {
+                "id": 503,
                 "user": "CatLover22",
                 "comment": "I think so too, but my cat hasn’t broken it yet."
               }
             ]
           }
-        ]
+        ],
+        "options": []
       },
       {
         "id": 2,
@@ -191,6 +256,7 @@
             "comment": "My dog loves this bed, perfect for naps!",
             "replies": [
               {
+                "id": 601,
                 "user": "PuppyLover",
                 "comment": "Same, my dog sleeps like a log on this bed."
               }
@@ -202,12 +268,14 @@
             "comment": "Soft and spacious, but it could use more padding.",
             "replies": [
               {
+                "id": 602,
                 "user": "DogLover99",
                 "comment": "Good point, but my dog seems fine with it."
               }
             ]
           }
-        ]
+        ],
+        "options": []
       },
       {
         "id": 3,
@@ -225,10 +293,12 @@
             "comment": "This kit has everything I need for my dog!",
             "replies": [
               {
+                "id": 701,
                 "user": "PetStylist",
                 "comment": "I agree, the scissors are especially good quality."
               },
               {
+                "id": 702,
                 "user": "HappyOwner",
                 "comment": "The brush is great for long-haired pets."
               }
@@ -240,12 +310,14 @@
             "comment": "Good value for the price, but the comb could be sturdier.",
             "replies": [
               {
-                "user": "GroomingExpert",
-                "comment": "I noticed that too, but it still works well."
+                "id": 703,
+                "user": "CatOwner",
+                "comment": "True, my comb broke after a few uses."
               }
             ]
           }
-        ]
+        ],
+        "options": []
       }
     ]
   }

@@ -1,4 +1,25 @@
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+}
+
 .ratingBox {
   display: flex;
   color: rgb(220, 195, 31);
+}
+
+.selectContainer {
+  display: flex;
+  gap: 10px;
+
+  .selectBox {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.commentBox {
+  display: flex;
 }
