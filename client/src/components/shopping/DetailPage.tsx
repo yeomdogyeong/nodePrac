@@ -166,6 +166,11 @@ export const DetailPage = () => {
         </div>
       </div>
       <div>
+        {/* 원래는 답글을 클릭할 수록 해당 state를 계속 생성해주는 함수를 설정해줘야하나?
+        라고 고민했었음.
+        그냥 클릭하면 해당 id에 대한 답글을 보여주고 
+        보여지던 답글을 클릭하면 null로 설정 */}
+
         {list[item].reviews.map((el) => (
           <div>
             <div className={s.commentBox}>
@@ -176,7 +181,9 @@ export const DetailPage = () => {
               {el.replies.map((reply) => (
                 <div key={reply.id}>
                   {selectedId === reply.id ? (
-                    <div>{reply.comment}</div>
+                    <div onClick={() => handleMoreComment(reply.id)}>
+                      {reply.comment}
+                    </div>
                   ) : (
                     <button onClick={() => handleMoreComment(reply.id)}>
                       [답글보기]
