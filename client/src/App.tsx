@@ -8,19 +8,24 @@ import { ThemeProvider } from "./theme/ThemeProvider";
 import "./scss/font.scss";
 import { ShopHome } from "./components/shopping/ShopHome";
 import { DetailPage } from "./components/shopping/DetailPage";
+import { RecoilRoot } from "recoil";
+import { State } from "./components/State";
 function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shopping" element={<ShopHome />} />
-          <Route path="/shoppingItem" element={<DetailPage />} />
-          <Route path="/todo" element={<TodoList />} />
-          <Route path="/todo/calendar" element={<Calendars />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <RecoilRoot>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shopping" element={<ShopHome />} />
+            <Route path="/shoppingItem" element={<DetailPage />} />
+            <Route path="/todo" element={<TodoList />} />
+            <Route path="/todo/calendar" element={<Calendars />} />
+            <Route path="/state" element={<State />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </RecoilRoot>
   );
 }
 
