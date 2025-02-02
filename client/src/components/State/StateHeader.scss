@@ -1,0 +1,14 @@
+.header-container {
+  height: 100px;
+  background-color: beige;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+
+  .site-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+}

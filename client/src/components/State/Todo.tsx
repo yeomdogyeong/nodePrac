@@ -1,16 +1,10 @@
 import { Underline } from "lucide-react";
 import React, { useState } from "react";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+import { todoListState } from "@/Recoil/todoListState";
+import { StateHeader } from "./StateHeader";
 
-const todoListState = atom({
-  key: "todoListState",
-  default: [
-    { id: 1, value: "mango", do: false, extra: "wow", edit: false },
-    { id: 2, value: "dg", do: false, extra: "dummy!", edit: false },
-  ],
-});
-
-export const State = () => {
+export const Todo = () => {
   const [inputV, setInputV] = useState("");
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputV(e.target.value);
@@ -48,7 +42,6 @@ export const State = () => {
     setTodoList(newList);
   };
   //
-  const [editS, setEditS] = useState(false);
   const [editContent, setEditContent] = useState("");
   const finishEdit = (e: any, id: number) => {
     // setEditContent(e.target.value);
@@ -72,6 +65,7 @@ export const State = () => {
   };
   return (
     <div>
+      <StateHeader />
       <input value={inputV} onChange={handleInput} />
       <button onClick={addItem}>plus</button>
       {text.map((el) => (
